@@ -1,6 +1,6 @@
 ---
 title: "Gov 50 Final Project"
-author: "Your Name Here"
+author: "Eura Choi"
 description: "My final project"
 output:
   distill::distill_article:
@@ -11,4 +11,4 @@ output:
 
 ## Project thoughts
 
-I am interested in exploring data related to...
+I am interested in exploring UN General Assembly Voting and Ideal Point data. Ideal point estimates the ideological distance between countries based on the ways they vote in UN General Assembly sessions. This dataset is published by Erik Voeten, Anton Strezhnev, and Michael Bailey and is available on Harvard dataverse. While the dataset includes data from 1946-2022 (General Assembly sessions 1-77), I will be focusing particularly on the data from 1965-2022. The purpose of analyzing this data is to establish correlation between the independent and dependent variables of my thesis. 
