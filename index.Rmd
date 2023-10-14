@@ -1,14 +1,17 @@
 ---
 title: "Gov 50 Final Project"
 author: "Eura Choi"
-description: "My final project"
+description: "My Final Project"
 output:
   distill::distill_article:
     self_contained: false
 ---
 
+## Proposal
 
+I am interested in exploring UN General Assembly Voting and Ideal Point data. Ideal point estimates the ideological distance between countries based on the ways they vote in UN General Assembly sessions. This dataset is published by Erik Voeten, Anton Strezhnev, and Michael Bailey and is available on Harvard dataverse. The dataset includes records from 1946-2022, represented by General Assembly sessions 1-77.
 
-## Project thoughts
+My primary research question is: What is the effect of geopolitical alignment (as measured by UN ideal point) on governmental interest in reconciling historical discord between South Korea and Japan? By historical discord, I am referring to the ongoing memory war between South Korea and Japan related to issues of World War II and Japanese colonization of Korea. The past decade has witnessed sudden yet variable bilateral efforts to reconcile the history issue and my hypothesis is that such sudden and variable interest is a product of perceived geopolitical alignment between the two countries. I believe that recent instability in East Asian regional dynamics (ie US-China power competition) has increased pressure for the two countries to stabilize messy history-based tension. 
 
-I am interested in exploring UN General Assembly Voting and Ideal Point data. Ideal point estimates the ideological distance between countries based on the ways they vote in UN General Assembly sessions. This dataset is published by Erik Voeten, Anton Strezhnev, and Michael Bailey and is available on Harvard dataverse. While the dataset includes data from 1946-2022 (General Assembly sessions 1-77), I will be focusing particularly on the data from 1965-2022. The purpose of analyzing this data is to establish correlation between the independent and dependent variables of my thesis. 
+I will be focusing particularly on the past decade between the years of 2015 and 2022 (the years after the 2015 agreement was signed as the first bilateral agreement re historical issues since 1965 normalization of relations). My outcome variable will represent the three events that expired on the state level between both countries regarding historical tension (2015 agreement, cancellation of 2015 agreement in 2019, and 2023 agreement). I hope to measure how close Japan and South Korea were in ideal point around these events (as well as their relationships with regional partners) and see if there is correlation between any of these relationships and the positive or negative developments on the history issue represented by the three bilateral efforts listed above. Convergence in ideal point between South Korea and Japan around positive developments and divergence in ideal point around negative developments would help prove my hypothesis. A different trend would disprove my hypothesis, with South Korea and Japan's other regional relationships as a possible confounder. 
+
