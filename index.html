@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["data/AgreementScoresAll_Jul2023.Rdata","data/IdealpointestimatesAll_Jul2023.csv","data/UNVotes.rda","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-1-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1518,13 +1518,37 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 <div class="d-article">
 <h2 id="proposal">Proposal</h2>
-<p>I am interested in exploring UN General Assembly Voting and Ideal Point data. Ideal point estimates the ideological distance between countries based on the ways they vote in UN General Assembly sessions. This dataset is published by Erik Voeten, Anton Strezhnev, and Michael Bailey and is available on Harvard dataverse. The dataset includes records from 1946-2022, represented by General Assembly sessions 1-77.
-
-My primary research question is: What is the effect of geopolitical alignment (as measured by UN ideal point) on governmental interest in reconciling historical discord between South Korea and Japan? By historical discord, I am referring to the ongoing memory war between South Korea and Japan related to issues of World War II and Japanese colonization of Korea. The past decade has witnessed sudden yet variable bilateral efforts to reconcile the history issue and my hypothesis is that such sudden and variable interest is a product of perceived geopolitical alignment between the two countries. I believe that recent instability in East Asian regional dynamics (ie US-China power competition) has increased pressure for the two countries to stabilize messy history-based tension. 
-
-I will be focusing particularly on the past decade between the years of 2015 and 2022 (the years after the 2015 agreement was signed as the first bilateral agreement re historical issues since 1965 normalization of relations). My outcome variable will represent the three events that expired on the state level between both countries regarding historical tension (2015 agreement, cancellation of 2015 agreement in 2019, and 2023 agreement). I hope to measure how close Japan and South Korea were in ideal point around these events (as well as their relationships with regional partners) and see if there is correlation between any of these relationships and the positive or negative developments on the history issue represented by the three bilateral efforts listed above. Convergence in ideal point between South Korea and Japan around positive developments and divergence in ideal point around negative developments would help prove my hypothesis. A different trend would disprove my hypothesis, with South Korea and Japan's other regional relationships as a possible confounder. 
-.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>I am interested in exploring UN General Assembly Voting and Ideal Point data. Ideal point estimates the ideological distance between countries based on the ways they vote in UN General Assembly sessions. This dataset is published by Erik Voeten, Anton Strezhnev, and Michael Bailey and is available on Harvard dataverse. The dataset includes records from 1946-2022, represented by General Assembly sessions 1-77.</p>
+<p>My primary research question is: What is the effect of geopolitical alignment (as measured by UN ideal point) on governmental interest in reconciling historical discord between South Korea and Japan? By historical discord, I am referring to the ongoing memory war between South Korea and Japan related to issues of World War II and Japanese colonization of Korea. The past decade has witnessed sudden yet variable bilateral efforts to reconcile the history issue and my hypothesis is that such sudden and variable interest is a product of perceived geopolitical alignment between the two countries. I believe that recent instability in East Asian regional dynamics (ie US-China power competition) has increased pressure for the two countries to stabilize messy history-based tension.</p>
+<p>I will be focusing particularly on the past decade between the years of 2015 and 2022 (the years after the 2015 agreement was signed as the first bilateral agreement re historical issues since 1965 normalization of relations). My outcome variable will represent the three events that expired on the state level between both countries regarding historical tension (2015 agreement, cancellation of 2015 agreement in 2019, and 2023 agreement). I hope to measure how close Japan and South Korea were in ideal point around these events (as well as their relationships with regional partners) and see if there is correlation between any of these relationships and the positive or negative developments on the history issue represented by the three bilateral efforts listed above. Convergence in ideal point between South Korea and Japan around positive developments and divergence in ideal point around negative developments would help prove my hypothesis. A different trend would disprove my hypothesis, with South Korea and Japan’s other regional relationships as a possible confounder.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
+<span><span class='fu'><a href='https://rdrr.io/r/base/load.html'>load</a></span><span class='op'>(</span><span class='st'>"data/AgreementScoresAll_Jul2023.Rdata"</span><span class='op'>)</span></span>
+<span><span class='fu'><a href='https://rdrr.io/r/base/load.html'>load</a></span><span class='op'>(</span><span class='st'>"data/UNVotes.rda"</span><span class='op'>)</span></span>
+<span></span>
+<span></span>
+<span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>japankorea</span> <span class='op'>&lt;-</span> <span class='va'>dfAgree</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>ccode1</span> <span class='op'>==</span> <span class='st'>"732"</span>, <span class='va'>ccode2</span> <span class='op'>==</span> <span class='st'>"740"</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>year</span>, y <span class='op'>=</span> <span class='va'>IdealPointDistance</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Year"</span>, y <span class='op'>=</span> <span class='st'>"Ideal Point Distance Between ROK and Japan"</span>, title <span class='op'>=</span> <span class='st'>"Ideal Point Distance Between ROK and Japan Over Time"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/lims.html'>ylim</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>1</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>&lt;ScaleContinuousPosition&gt;
+ Range:  
+ Limits:    0 --    1</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>japankorea</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-1-1.png" width="624" /></p>
+</div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
