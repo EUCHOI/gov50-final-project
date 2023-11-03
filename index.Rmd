@@ -15,3 +15,9 @@ My primary research question is: What is the effect of geopolitical alignment (a
 
 I will be focusing particularly on the past decade between the years of 2015 and 2022 (the years after the 2015 agreement was signed as the first bilateral agreement re historical issues since 1965 normalization of relations). My outcome variable will represent the three events that expired on the state level between both countries regarding historical tension (2015 agreement, cancellation of 2015 agreement in 2019, and 2023 agreement). I hope to measure how close Japan and South Korea were in ideal point around these events (as well as their relationships with regional partners) and see if there is correlation between any of these relationships and the positive or negative developments on the history issue represented by the three bilateral efforts listed above. Convergence in ideal point between South Korea and Japan around positive developments and divergence in ideal point around negative developments would help prove my hypothesis. A different trend would disprove my hypothesis, with South Korea and Japan's other regional relationships as a possible confounder. 
 
+```{r}
+load("data/AgreementScoresAll_Jul2023.Rdata")
+```
+
+
+
