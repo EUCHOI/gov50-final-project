@@ -19,25 +19,69 @@ I will be focusing particularly on the past decade between the years of 2015 and
 library(tidyverse)
 load("data/AgreementScoresAll_Jul2023.Rdata")
 load("data/UNVotes.rda")
-
-
-
 library(ggplot2)
+```
 
+```{r}
 japankorea <- dfAgree |>
-  filter(ccode1 == "732", ccode2 == "740") |>
-
+  filter(ccode1 == "732", ccode2 == "740", year >= 2010) |>
   ggplot(mapping = aes(x = year, y = IdealPointDistance)) +
   geom_point() +
   labs(x = "Year", y = "Ideal Point Distance Between ROK and Japan", title = "Ideal Point Distance Between ROK and Japan Over Time") +
   geom_line()
   ylim(0,1)
 
-japankorea
+  
+japanchina <- dfAgree |>
+  filter(ccode1 == "740", ccode2 == "710", year >= 2010) |>
+  ggplot(mapping = aes(x = year, y = IdealPointDistance)) +
+  geom_point() +
+  labs(x = "Year", y = "Ideal Point Distance Between China and Japan", title = "Ideal Point Distance Between China and Japan Over Time") +
+  geom_line()
+  ylim(0,1)
+
+  
+koreachina <- dfAgree |>
+  filter(ccode1 == "732", ccode2 == "710", year >= 2010) |>
+  ggplot(mapping = aes(x = year, y = IdealPointDistance)) +
+  geom_point() +
+  labs(x = "Year", y = "Ideal Point Distance Between ROK and China", title = "Ideal Point Distance Between ROK and China Over Time") +
+  geom_line()
+  ylim(0,1)
 
 
+uschina <- dfAgree |>
+  filter(ccode1 == "2", ccode2 == "710", year >= 2010) |>
+  ggplot(mapping = aes(x = year, y = IdealPointDistance)) +
+  geom_point() +
+  labs(x = "Year", y = "Ideal Point Distance Between US and China", title = "Ideal Point Distance Between US and China Over Time") +
+  geom_line()
+  ylim(0,1)
+
+
+uskorea <- dfAgree |>
+  filter(ccode1 == "2", ccode2 == "732", year >= 2010) |>
+  ggplot(mapping = aes(x = year, y = IdealPointDistance)) +
+  geom_point() +
+  labs(x = "Year", y = "Ideal Point Distance Between US and ROK", title = "Ideal Point Distance Between US and ROK Over Time") +
+  geom_line()
+  ylim(0,1)
+
+usjapan <- dfAgree |>
+  filter(ccode1 == "2", ccode2 == "740", year >= 2010) |>
+  ggplot(mapping = aes(x = year, y = IdealPointDistance)) +
+  geom_point() +
+  labs(x = "Year", y = "Ideal Point Distance Between US and Japan", title = "Ideal Point Distance Between US and Japan Over Time") +
+  geom_line()
+  ylim(0,1)
+  
+   japankorea
+  japanchina
+  koreachina
+  uschina
+  uskorea
+  usjapan
 
 ```
-
 
 
