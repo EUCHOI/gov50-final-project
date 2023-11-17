@@ -1544,7 +1544,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
  Limits:    0 --    1</code></pre>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>japanchina</span> <span class='op'>&lt;-</span> <span class='va'>dfAgree</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>ccode1</span> <span class='op'>==</span> <span class='st'>"740"</span>, <span class='va'>ccode2</span> <span class='op'>==</span> <span class='st'>"740"</span>, <span class='va'>year</span> <span class='op'>&gt;=</span> <span class='fl'>2010</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>ccode1</span> <span class='op'>==</span> <span class='st'>"740"</span>, <span class='va'>ccode2</span> <span class='op'>==</span> <span class='st'>"710"</span>, <span class='va'>year</span> <span class='op'>&gt;=</span> <span class='fl'>2010</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>year</span>, y <span class='op'>=</span> <span class='va'>IdealPointDistance</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Year"</span>, y <span class='op'>=</span> <span class='st'>"Ideal Point Distance Between China and Japan"</span>, title <span class='op'>=</span> <span class='st'>"Ideal Point Distance Between China and Japan Over Time"</span><span class='op'>)</span> <span class='op'>+</span></span>
@@ -1602,6 +1602,30 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <pre><code>&lt;ScaleContinuousPosition&gt;
  Range:  
  Limits:    0 --    1</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span>   <span class='va'>japankorea</span></span></code></pre>
+</div>
+<img src="index_files/figure-html5/unnamed-chunk-2-1.png" width="624" />
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span>  <span class='va'>japanchina</span></span></code></pre>
+</div>
+<img src="index_files/figure-html5/unnamed-chunk-2-2.png" width="624" />
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span>  <span class='va'>koreachina</span></span></code></pre>
+</div>
+<img src="index_files/figure-html5/unnamed-chunk-2-3.png" width="624" />
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span>  <span class='va'>uschina</span></span></code></pre>
+</div>
+<img src="index_files/figure-html5/unnamed-chunk-2-4.png" width="624" />
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span>  <span class='va'>uskorea</span></span></code></pre>
+</div>
+<img src="index_files/figure-html5/unnamed-chunk-2-5.png" width="624" />
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span>  <span class='va'>usjapan</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-2-6.png" width="624" /></p>
 </div>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
