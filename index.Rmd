@@ -7,81 +7,247 @@ output:
     self_contained: false
 ---
 
-## Proposal
+INTRODUCTION
 
-I am interested in exploring UN General Assembly Voting and Ideal Point data. Ideal point estimates the ideological distance between countries based on the ways they vote in UN General Assembly sessions. This dataset is published by Erik Voeten, Anton Strezhnev, and Michael Bailey and is available on Harvard dataverse. The dataset includes records from 1946-2022, represented by General Assembly sessions 1-77.
+  Ever since normalizing relations in 1965, South Korea and Japan have been embroiled in a symbolic “memory war,” where diplomatic affairs have been fraught with competing historical narratives on the nature of Japanese colonial rule and wartime policy. While most reconciliation case studies show general improvement of relations over time as “memories fade of the actual events” (Shaw 202, 2022), the South Korea–Japan memory war has been an extremely tumultuous one, plagued by persistent yet sporadic periods of intensely polarized historical rhetoric. To this day, disagreements regarding perceived historical wrongs have proved capable of disrupting virtually all channels of cooperation between states, including those related to security and economic welfare. We have seen this in politically motivated punitive trade measures and threats to cancel intelligence-sharing agreements.  
 
-My primary research question is: What is the effect of geopolitical alignment (as measured by UN ideal point) on governmental interest in reconciling historical discord between South Korea and Japan? By historical discord, I am referring to the ongoing memory war between South Korea and Japan related to issues of World War II and Japanese colonization of Korea. The past decade has witnessed sudden yet variable bilateral efforts to reconcile the history issue and my hypothesis is that such sudden and variable interest is a product of perceived geopolitical alignment between the two countries. I believe that recent instability in East Asian regional dynamics (ie US-China power competition) has increased pressure for the two countries to stabilize messy history-based tension. 
+  Conflict and cooperation between the two states are frequently associated with South Korea’s other regional relationships. For example, periods of friendly relations between Japan and South Korea often occur when Korean commitment to the US-Japan-ROK quasi-alliance is high and periods of hostile relations often occur when South Korea signals stronger alignment with China. While Japan has more clearly balanced against China by means of strengthened commitment to the US and the Indo-Pacific strategy, South Korea has been ambiguous in its alignment choices, ultimately portraying a kind of hedging behavior between China and the US (Choi and Oh 2022, Lim and Cooper 2015). 
+  
+In this project, I ask the following research question: Why is there variation in the state of relations between Japan and Korea? My hypothesis is that there is a causal relationship between Korea’s alignment with China or the US and its alignment with Japan. The subject is an important one; variability in Japan-South Korea relations despite the two countries’ status as the region’s only liberally democratic US allies with similar developmental experiences and security threats has long puzzled both realist and liberal scholars. I hope my research will shed light on the political factors that perpetuate antagonism and ascertain the nature of conflict and cooperation between the two states. 
 
-I will be focusing particularly on the past decade between the years of 2015 and 2022 (the years after the 2015 agreement was signed as the first bilateral agreement re historical issues since 1965 normalization of relations). My outcome variable will represent the three events that expired on the state level between both countries regarding historical tension (2015 agreement, cancellation of 2015 agreement in 2019, and 2023 agreement). I hope to measure how close Japan and South Korea were in ideal point around these events (as well as their relationships with regional partners) and see if there is correlation between any of these relationships and the positive or negative developments on the history issue represented by the three bilateral efforts listed above. Convergence in ideal point between South Korea and Japan around positive developments and divergence in ideal point around negative developments would help prove my hypothesis. A different trend would disprove my hypothesis, with South Korea and Japan's other regional relationships as a possible confounder. 
+
 
 ```{r}
 library(tidyverse)
 load("data/AgreementScoresAll_Jul2023.Rdata")
 load("data/UNVotes.rda")
 library(ggplot2)
+library(dplyr)
+library(broom)
+library(patchwork)
 ```
+
+DATA
+
+  To answer my research question, I am utilizing UN General Assembly Voting and Ideal Point data. Ideal point presents a numerical value of a country’s general foreign policy preferences based on how they vote in the annual UN General Assembly. The formula for ideal point was created by Erik Voeten, Anton Strezhnev, and Michael Bailey and the voting records and subsequent ideal point calculation of every UN-participating country are available in a dataset published by these scholars on the Harvard dataverse. This dataset contains the records of all UN General Assembly meetings, up to the most recent 77th meeting in 2022. Considering the fact that South Korea did not join the UN until 1991, I will be focusing on the period from 1991 to 2022. 
+	
+	To operationalize the degree of “alignment” between South Korea and the US, China, and Japan, I will be using a statistical model and presenting differences between the ideal points of the countries in question. Many scholars have used ideal point distance to present the ideological difference in foreign policy preferences between countries so there is scholarly precedent for my use of the dataset. My dependent variable is thus measured by the difference in ideal point between South Korea and Japan while my two potential independent variables are measured by the differences in ideal point between South Korea and US / South Korea and China. They are demonstrated by the graphs below: 
+	
+Dependent Variable: 
+
 
 ```{r}
 japankorea <- dfAgree |>
-  filter(ccode1 == "732", ccode2 == "740", year >= 2010) |>
+  filter(ccode1 == "740", ccode2 == "732", year >= 1991) |>
   ggplot(mapping = aes(x = year, y = IdealPointDistance)) +
   geom_point() +
   labs(x = "Year", y = "Ideal Point Distance Between ROK and Japan", title = "Ideal Point Distance Between ROK and Japan Over Time") +
   geom_line()
   ylim(0,1)
-
   
-japanchina <- dfAgree |>
-  filter(ccode1 == "740", ccode2 == "710", year >= 2010) |>
-  ggplot(mapping = aes(x = year, y = IdealPointDistance)) +
-  geom_point() +
-  labs(x = "Year", y = "Ideal Point Distance Between China and Japan", title = "Ideal Point Distance Between China and Japan Over Time") +
-  geom_line()
-  ylim(0,1)
-
-  
-koreachina <- dfAgree |>
-  filter(ccode1 == "732", ccode2 == "710", year >= 2010) |>
-  ggplot(mapping = aes(x = year, y = IdealPointDistance)) +
-  geom_point() +
-  labs(x = "Year", y = "Ideal Point Distance Between ROK and China", title = "Ideal Point Distance Between ROK and China Over Time") +
-  geom_line()
-  ylim(0,1)
+japankorea
+```
 
 
-uschina <- dfAgree |>
-  filter(ccode1 == "2", ccode2 == "710", year >= 2010) |>
-  ggplot(mapping = aes(x = year, y = IdealPointDistance)) +
-  geom_point() +
-  labs(x = "Year", y = "Ideal Point Distance Between US and China", title = "Ideal Point Distance Between US and China Over Time") +
-  geom_line()
-  ylim(0,1)
+
+Independent Variables:
 
 
+```{r}
 uskorea <- dfAgree |>
-  filter(ccode1 == "2", ccode2 == "732", year >= 2010) |>
+  filter(ccode1 == "732", ccode2 == "2", year >= 1991) |>
   ggplot(mapping = aes(x = year, y = IdealPointDistance)) +
   geom_point() +
   labs(x = "Year", y = "Ideal Point Distance Between US and ROK", title = "Ideal Point Distance Between US and ROK Over Time") +
   geom_line()
   ylim(0,1)
 
-usjapan <- dfAgree |>
-  filter(ccode1 == "2", ccode2 == "740", year >= 2010) |>
+chinakorea <- dfAgree |>
+  filter(ccode1 == "732", ccode2 == "710", year >= 1991) |>
   ggplot(mapping = aes(x = year, y = IdealPointDistance)) +
   geom_point() +
-  labs(x = "Year", y = "Ideal Point Distance Between US and Japan", title = "Ideal Point Distance Between US and Japan Over Time") +
+  labs(x = "Year", y = "Ideal Point Distance Between China and ROK", title = "Ideal Point Distance Between China and ROK Over Time") +
   geom_line()
   ylim(0,1)
   
-   japankorea
-  japanchina
-  koreachina
-  uschina
-  uskorea
-  usjapan
+uskorea
+chinakorea
+```
+  	
+
+  	Visually speaking, there seems to be an inverse relationship between the ROK-Japan relationship and the China-ROK relationship but this can not be ascertained without statistical analysis. 
+
+  My research design does not impose treatment on a subject due to the nature of my study and is thus difficult to characterize as a randomized, before-and-after, differences-in-differences, or a cross-sectional design. However, I will be using a sort of “control” by also looking to see if the relationship between France and South Korea affects its relationship with Japan. France is a country that South Korea has had unproblematic diplomatic relationships with, and France itself has very little involvement/investment in the East Asian region. Thus, the study could be characterized as a sort of cross-sectional design. I will run a linear regression between my independent and dependent variables to ascertain whether there is a significant relationship between the two. I will also compare such results to the linear regressions on my control to see if my results are significant. The control is also demonstrated below:
+  
+  
+```{r}
+francekorea <- dfAgree |>
+  filter(ccode1 == "732", ccode2 == "220", year >= 1991) |>
+  ggplot(mapping = aes(x = year, y = IdealPointDistance)) +
+  geom_point() +
+  labs(x = "Year", y = "Ideal Point Distance Between France and ROK", title = "Ideal Point Distance Between France and ROK Over Time") +
+  geom_line()
+  ylim(0,1)
+
+francekorea
+```
+
+
+RESULTS 
+
+	As mentioned in the previous section, I am running a linear regression between my independent and dependent variables to ascertain whether there is a significant causal relationship. The results are demonstrated by the tables below. 
+
+
+```{r}
+us <- dfAgree |>
+  filter(ccode1 == "2" & ccode2 == "732") |>
+  mutate(uskorea_data = IdealPointDistance) |>
+  select(year, IdealPointDistance) |>
+  rename(IDP_US = IdealPointDistance)
+
+japan <- dfAgree |>
+  filter(ccode1 == "732" & ccode2 == "740") |>
+  mutate(japankorea_data = IdealPointDistance) |>
+  select(year, IdealPointDistance) |>
+  rename(IDP_JP = IdealPointDistance)
+
+china <- dfAgree |>
+  filter(ccode1 == "732" & ccode2 == "710") |>
+  mutate(chinakorea_data = IdealPointDistance) |>
+  select(year, IdealPointDistance) |>
+  rename(IDP_CHI = IdealPointDistance)
+
+france <- dfAgree |>
+  filter(ccode1 == "732" & ccode2 == "220") |>
+  mutate(francekorea_data = IdealPointDistance) |>
+  select(year, IdealPointDistance) |>
+  rename(IDP_FRA = IdealPointDistance)
+
+merged_data <- merge(
+  merge(
+    merge(us, japan, by = "year", suffixes = c("_US", "_JP")),
+    china, by = "year", suffixes = c("", "_CHI")),
+    france, by = "year", suffixes = c("", "_FRA"))
 
 ```
+
+
+IV: South Korea-US on South Korea-Japan
+```{r}
+fit_2 <- lm(IDP_JP ~ IDP_US, data = merged_data)
+
+fit_2 |>
+broom::tidy() |>
+select(term, estimate) |>
+knitr::kable(digits = 2)
+
+fit_2
+```
+
+
+  The coefficient for the ideal point distance between the US and South Korea is .39, meaning that for every ideal point increase in the relationship between the US and South Korea, the ideal point difference between South Korea and Japan increases by .39. Considering that .39 is very close to 0, it seems that the independent variable in this case does not have a significant effect on the dependent variable. A coefficient of 0 would mean that the independent variable has no effect on the dependent variable. 
+
+
+IV: South Korea-China on South Korea-Japan
+
+
+```{r}
+fit_3 <- lm(IDP_JP ~ IDP_CHI, data = merged_data)
+
+fit_3 |>
+broom::tidy() |>
+select(term, estimate) |>
+knitr::kable(digits = 2)
+
+fit_3
+```
+
+
+  The coefficient for the ideal point distance between China and South Korea is .21, meaning that for every ideal point increase in the relationship between the US and South Korea, the ideal point difference between South Korea and Japan increases by .21. Considering that .21 is very close to 0, it seems that the independent variable in this case does not have a significant effect on the dependent variable. However, this independent variable does seem to have a lesser effect on the dependent variable than the previous one (ideal point distance between the US and South Korea). 
+
+
+Control: South Korea-France on South Korea-Japan
+
+
+```{r}
+fit_4 <- lm(IDP_JP ~ IDP_FRA, data = merged_data)
+
+fit_4 |>
+broom::tidy() |>
+select(term, estimate) |>
+knitr::kable(digits = 2)
+
+fit_4
+```
+
+
+  The coefficient for the ideal point distance between France and South Korea is .49, meaning that for every ideal point increase in the relationship between the US and South Korea, the ideal point difference between South Korea and Japan increases by .49. In this study, the coefficient of the control has a greater effect on the dependent variable than either of the proposed independent variables. Thus, even beyond the fact that the coefficients of the independent variables were already low and close to 0 (.39 and .21), the fact that they are less than the coefficient of the control demonstrates that they do not have a significant causal effect on the dependent variable. 
+  
+CONCLUSION
+
+  All in all, the study demonstrates that at least in terms of ideal point differences, South Korea’s other regional relationships do not have a significant effect on its relationship with Japan. After concluding linear regression analyses, coeffieicents revealed that there is little effect on ideal point differences between US-Korea and US-China on ideal point differences between US-Japan. Contextualizing results with a constant (South Korea’s relationship with a benign and non-regional country) further demonstrated a lack of causal effect. 
+  
+  However, this does not necessarily indicate that the hypothesis is faulty. It is very possible that differences in ideal point are not the best measure of alignment or relationships within a regional context. For example, ideal point was famously used by Iain Johnston (2019) to demonstrate geopolitical alignment/common interest between China and other areas of the world (i.e. Western Europe, Global South, etc.). While this data was useful in a larger global context, I seek to ascertain differences within specific regions. When studying data between the US-ROK, ROK-Japan, and Japan-US relationships, we get the following results:
+  
+
+```{r}
+japankorea_data <- dfAgree |>
+  filter(ccode1 == "732", ccode2 == "740", year >= 1991)
+
+uskorea_data <- dfAgree |>
+  filter(ccode1 == "2", ccode2 == "732", year >= 1991)
+
+japanus_data <- dfAgree |>
+  filter(ccode1 == "740", ccode2 == "2", year >= 1991)
+
+combined_data <- bind_rows(
+  mutate(japankorea_data, CountryPair = "Japan-ROK"),
+  mutate(uskorea_data, CountryPair = "US-ROK"),
+  mutate(japanus_data, CountryPair = "Japan-US"))
+
+ggplot(combined_data, aes(x = year, y = IdealPointDistance, color = CountryPair)) +
+  geom_line(size = 1) +
+  geom_point(size = 3) +
+  labs(x = "Year", y = "Ideal Point Distance", title = "All Lines")
+```
+
+
+  This does not make sense as it is widely known that Japan and the US are very closely aligned in regional interests while Korea often strays from Japan and the US in terms of its own interests. This graph demonstrates the opposite: closer alignment between Japan and South Korea than the other relationships. A closer examination of all the voting points in the UN General Assembly might help ascertain the type of “alignment” that ideal point best helps indicate. 
+  
+  With more time/resources, a better dataset to help answer the proposed research question might be ICEWS coded event data. ICEWS coded event data extracts the actions of socio-political actors from hundreds of news articles daily and assigns them a value between -10 and 10 (hostile to cooperative) according to the CAMEO (Conflict and Mediation Event Observations) scale. This data has been collected for a period longer than ideal point and more accurately quantifies conflict and cooperation between states with extreme detail (after all, it is collected daily as opposed to yearly like UN General Assembly votes). Considering the sheer size and complexity of this dataset, it was difficult to use for the purposes of this project but it may offer promising results if properly used.
+
+
+
+
+
+
+
+
+Bibliography: 
+
+Alastair Iain Johnston (2019) The Failures of the ‘Failure of Engagement’ with China, The Washington Quarterly, 42:2, 99-114, DOI: 10.1080/0163660X.2019.1626688
+
+Boschee, Elizabeth; Lautenschlager, Jennifer; O'Brien, Sean; Shellman, Steve; Starz, James; Ward, Michael, 2015, "ICEWS Coded Event Data", https://doi.org/10.7910/DVN/28075, Harvard Dataverse, V37, UNF:6:NOSHB7wyt0SQ8sMg7+w38w== [fileUNF]
+
+Choi, Byung-il, and Jennifer S Oh. 2022. “Rise of Geopolitics and Changing Korea and Japan 
+Trade Politics.” East Asian economic review 26, no. 1: 27–48.
+
+Lim, Darren J., and Zack Cooper. 2015. “Reassessing Hedging: The Logic of Alignment in East 
+Asia.” Security Studies 24, no. 4: 696–727. 
+https://doi.org/10.1080/09636412.2015.1103130.
+
+Shaw, Meredith. 2022. “Godzilla Vs Pulgasari: Anti-Japanism and Anti-Communism as Dueling 
+Antagonisms in South Korean Politics.” Journal of East Asian Studies 22, no. 2: 201–30. 
+https://doi.org/10.1017/jea.2022.2.
+
+Voeten, Erik; Strezhnev, Anton; Bailey, Michael, 2009, "United Nations General Assembly Voting Data", https://doi.org/10.7910/DVN/LEJUQZ, Harvard Dataverse, V31
+
+
+
+
+
+
+
+
 
 
